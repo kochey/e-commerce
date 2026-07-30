@@ -7,9 +7,17 @@ const product_Array = require("./constant")
 const productModel = require('../model/productModel')
 
 
-router.get('/' , (req , res)=>{
-  const products = productModel.find()
+router.get('/' , async (req , res)=>{
+  try{
+
+  const products =  await productModel.find()
+  console.log(products)
   res.status(200).json(products)
+
+  }catch(e){
+    console.log(e)
+    res.status(500).json({message:"Failed to fetch product from database"})
+  }
 })
 
 
