@@ -16,7 +16,7 @@ app.use("/cart", cart);
 app.use("/product", product);
 
 mongoose.connect(
-  "mongodb+srv://kochey:UeaEGUhKErRYmpGu@cluster0.224lwek.mongodb.net/?appName=Cluster0"
+process.env.mongodburi
 )
 .then(()=> console.log("db connection successfull to App"))
 .catch((err)=>console.log(err));

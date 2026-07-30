@@ -10,11 +10,11 @@ const productModel = require('../model/productModel')
 cart_array=[{}];
 
 
-mongoose.connect(
-  "mongodb+srv://kochey:UeaEGUhKErRYmpGu@cluster0.224lwek.mongodb.net/?appName=Cluster0"
-)
-.then(()=> console.log("db Connection successfull to cart"))
-.catch((err)=>console.log(err));        
+// mongoose.connect(
+//   "mongodb+srv://kochey:UeaEGUhKErRYmpGu@cluster0.224lwek.mongodb.net/?appName=Cluster0"
+// )
+// .then(()=> console.log("db Connection successfull to cart"))
+// .catch((err)=>console.log(err));        
         
 
  router.post("/add", async (req, res) => {
