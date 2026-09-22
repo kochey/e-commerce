@@ -1,34 +1,29 @@
+const product = require("./back_end/route/product");
+const user = require("./back_end/route/user");
+const cart = require("./back_end/route/cart");
 
-const product = require('./back_end/route/product');
-const user = require('./back_end/route/user');
-const cart = require('./back_end/route/cart');
-
-const express = require('express')
+const path = require("path");
+const express = require("express");
 const port = 4000;
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const app = express();
-app.use(express.json())
-
+app.use(express.json());
 
 app.use("/user", user);
 app.use("/cart", cart);
 app.use("/product", product);
 
-mongoose.connect(
-process.env.mongodburi
-)
-.then(()=> console.log("db connection successfull to App"))
-.catch((err)=>console.log(err));
+app.use(
+  express.static(path.join(__dirname, "stack-shop-frontend", "frontend")),
+);
 
+// console.log("Mongo URI starts with:", process.env.mongodburi?.slice(0, 20));
+mongoose
+  .connect(process.env.mongodburi)
+  .then(() => console.log("db connection successfull to App"))
+  .catch((err) => console.log(err));
 
-
-
-
-
-
-app.listen(port, ()=> {
-  console.log(`running at http://localhost:${port}`)
-})
-
-
+app.listen(port, () => {
+  console.log(`running at http://localhost:${port}`);
+});

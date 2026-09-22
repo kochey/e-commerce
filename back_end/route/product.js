@@ -11,7 +11,7 @@ router.get('/' , async (req , res)=>{
   try{
 
   const products =  await productModel.find()
-  console.log(products)
+
   res.status(200).json(products)
 
   }catch(e){
@@ -42,25 +42,6 @@ router.post("/add",async (req , res )=>{
     })
  }
  })
-
-
-
-// router.post("/products", (req, res)=>{
-//   console.log("request handled", req.body);
-//   let newProduct = {
-//     id : newID,
-//     title: req.body.title,
-//     price: req.body.price,
-//     description: req.body.description,
-//     categories: req.body.categories
-//   }
-//   products.push(newProduct)
-//   res.json({
-//     success: true,
-//     message: " succesfully added new product",
-//     product: newProduct
-//   })
-// })
 
 router.delete("/remove", async (req,res) => {
 

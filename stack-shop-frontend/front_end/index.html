@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Stack Shop - responsive e-commerce frontend">
+  <title>Stack Shop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- Authentication -->
+  <main id="auth-view" class="view">
+    <section class="auth-shell">
+      <div class="auth-brand">
+        <div class="brand-mark">S</div>
+        <span>STACK SHOP</span>
+      </div>
+
+      <div class="auth-card">
+        <div class="auth-copy">
+          <span class="eyebrow">WELCOME</span>
+          <h1>Everything you need,<br><span>in one place.</span></h1>
+          <p>Create an account or sign in to start shopping.</p>
+        </div>
+
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-auth-tab="signin">Sign in</button>
+          <button class="auth-tab" data-auth-tab="signup">Create account</button>
+        </div>
+
+        <form id="signin-form" class="auth-form">
+          <label>Email
+            <input id="signin-email" type="email" autocomplete="email" placeholder="you@example.com" required>
+          </label>
+          <label>Password
+            <input id="signin-password" type="password" autocomplete="current-password" placeholder="••••••••" required>
+          </label>
+          <button class="primary-btn" type="submit">Sign in <span>→</span></button>
+        </form>
+
+        <form id="signup-form" class="auth-form hidden">
+          <label>Full name
+            <input id="signup-name" type="text" autocomplete="name" placeholder="Your name" required>
+          </label>
+          <label>Email
+            <input id="signup-email" type="email" autocomplete="email" placeholder="you@example.com" required>
+          </label>
+          <label>Password
+            <input id="signup-password" type="password" autocomplete="new-password" placeholder="At least 6 characters" minlength="6" required>
+          </label>
+          <button class="primary-btn" type="submit">Create account <span>→</span></button>
+          <p class="form-note">After registration, check your email for the OTP if your backend requires verification.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Store -->
+  <main id="store-view" class="view hidden">
+    <header class="site-header">
+      <a class="logo" href="#" data-page="shop" aria-label="Stack Shop home">
+        <span class="brand-mark small">S</span>
+        <span>STACK SHOP</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <button class="nav-link active" data-page="shop">Shop</button>
+        <button class="nav-link" data-page="cart">Cart <span class="cart-count">0</span></button>
+      </nav>
+
+      <div class="header-actions">
+        <span id="user-name" class="user-name"></span>
+        <button id="logout-btn" class="ghost-btn">Logout</button>
+        <button class="mobile-cart" data-page="cart" aria-label="Open cart">Cart <span class="cart-count">0</span></button>
+      </div>
+    </header>
+
+    <section id="shop-page" class="page">
+      <div class="hero">
+        <div>
+          <span class="eyebrow">THE CATALOG</span>
+          <h2>Find your next<br><span>favorite product.</span></h2>
+        </div>
+        <div class="hero-side">
+          <p>Browse products from your Express API and add anything you like to your cart.</p>
+          <button class="outline-btn" id="open-add-product">+ Add product</button>
+        </div>
+      </div>
+
+      <div class="catalog-toolbar">
+        <div>
+          <h3>Products</h3>
+          <span id="product-count">0 products</span>
+        </div>
+        <label class="search-box">
+          <span>⌕</span>
+          <input id="product-search" type="search" placeholder="Search products...">
+        </label>
+      </div>
+
+      <div id="product-grid" class="product-grid">
+        <div class="loading">Loading products...</div>
+      </div>
+    </section>
+
+    <section id="cart-page" class="page hidden">
+      <div class="page-heading">
+        <div>
+          <span class="eyebrow">YOUR BAG</span>
+          <h2>Shopping cart</h2>
+        </div>
+        <button class="outline-btn" data-page="shop">← Continue shopping</button>
+      </div>
+
+      <div id="cart-layout" class="cart-layout">
+        <div id="cart-items" class="cart-items"></div>
+        <aside class="cart-summary">
+          <span class="eyebrow">SUMMARY</span>
+          <div class="summary-row"><span>Items</span><strong id="summary-items">0</strong></div>
+          <div class="summary-row total"><span>Total</span><strong id="summary-total">₦0.00</strong></div>
+          <button id="checkout-btn" class="primary-btn" type="button">Checkout <span>→</span></button>
+          <p>Checkout is a frontend placeholder because no checkout/payment route was supplied.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <!-- Add Product Modal -->
+  <div id="product-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <button class="modal-close" id="close-product-modal" aria-label="Close">×</button>
+      <span class="eyebrow">CATALOG</span>
+      <h2 id="modal-title">Add a product</h2>
+      <form id="product-form" class="product-form">
+        <label>Title
+          <input id="product-title" type="text" required placeholder="Product title">
+        </label>
+        <div class="two-col">
+          <label>Price
+            <input id="product-price" type="number" min="0" step="0.01" required placeholder="0">
+          </label>
+          <label>Quantity
+            <input id="product-quantity" type="number" min="0" step="1" required placeholder="0">
+          </label>
+        </div>
+        <label>Category
+          <input id="product-category" type="text" required placeholder="Category">
+        </label>
+        <label>Description
+          <textarea id="product-description" rows="4" required placeholder="Describe the product"></textarea>
+        </label>
+        <button class="primary-btn" type="submit">Add product <span>→</span></button>
+      </form>
+    </div>
+  </div>
+
+<script src="js/frontend_app.js"></script>
+</body>
+</html>
