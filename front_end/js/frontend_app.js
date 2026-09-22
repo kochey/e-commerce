@@ -1,6 +1,6 @@
 /*
  * STACK SHOP FRONTEND
- * Backend base URL: http://localhost:4000
+ * Backend base URL: 
  *
  * Routes used:
  * POST   /user/signup
@@ -15,7 +15,7 @@
  * PUT    /cart/update
  */
 
-const API_BASE = "http://localhost:4000";
+const API_BASE = "";
 
 const state = {
   products: [],
