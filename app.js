@@ -15,8 +15,12 @@ app.use("/cart", cart);
 app.use("/product", product);
 
 app.use(
-  express.static(path.join(__dirname, "stack-shop-frontend", "frontend")),
+  express.static(path.join(__dirname, "front_end")),
 );
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "front_end", "index.html"));
+});
 
 // console.log("Mongo URI starts with:", process.env.mongodburi?.slice(0, 20));
 mongoose
