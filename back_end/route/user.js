@@ -1,9 +1,9 @@
 const express = require("express");
 
-// this for send emails
 
 const app = express();
 const router = express.Router();
+const mongoose = require("mongoose");
 
 const Usermodel = require("../model/userModel");
 const founduser = "../queries/userqueries";
@@ -25,8 +25,8 @@ router.post("/signup", async (req, res) => {
   const hashedpassword = await bcrypt.hash(req.body.password, 10);
 
   // FOR OTP
-  const otp = Math.floor(10000 + Math.random() * 90000).toString();
-  const otpexpires = new Date(Date.now() + 10 * 60 * 1000);
+  // const otp = Math.floor(10000 + Math.random() * 90000).toString();
+  // const otpexpires = new Date(Date.now() + 10 * 60 * 1000);
 
   try {
     const newUser = new Usermodel({
@@ -38,13 +38,13 @@ router.post("/signup", async (req, res) => {
     });
 
     await newUser.save();
-    await sendOTPEmail(req.body.email, otp);
-    res
-      .status(200)
-      .json({
-        message:
-          "Registration succesfull , otp sent to your email expires in 10 minutes",
-      });
+    // await sendOTPEmail(req.body.email, otp);
+    // res
+    //   .status(200)
+    //   .json({
+    //     message:
+    //       "Registration succesfull , otp sent to your email expires in 10 minutes",
+    //   });
   } catch (e) {
     console.log("failed to create user");
     res.status(406).json({ message: "failed to create user" });
