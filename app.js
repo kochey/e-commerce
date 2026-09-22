@@ -5,9 +5,11 @@ const cart = require("./back_end/route/cart");
 const path = require("path");
 const express = require("express");
 const port = 4000;
+const cors = require('cors')
 
 const mongoose = require("mongoose");
 const app = express();
+app.use(cors())
 app.use(express.json());
 
 app.use("/user", user);
