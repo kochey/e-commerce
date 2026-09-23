@@ -15,7 +15,7 @@
  * PUT    /cart/update
  */
 
-const API_BASE = "";
+const API_BASE = "https://e-commerce-k3j3.onrender.com";
 
 const state = {
   products: [],
