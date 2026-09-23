@@ -3,11 +3,11 @@ const express = require("express");
 
 const app = express();
 const router = express.Router();
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
 const Usermodel = require("../model/userModel");
 const founduser = "../queries/userqueries";
-const sendOTPEmail = require("./utils/mailer");
+// const sendOTPEmail = require("./utils/mailer");
 
 app.use(router);
 const bcrypt = require("bcrypt");
@@ -33,18 +33,18 @@ router.post("/signup", async (req, res) => {
       email: req.body.email,
       name: req.body.name,
       password: hashedpassword,
-      otp: otp,
-      otpexpires: otpexpires,
+      // otp: otp,
+      // otpexpires: otpexpires,
     });
 
     await newUser.save();
     // await sendOTPEmail(req.body.email, otp);
-    // res
-    //   .status(200)
-    //   .json({
-    //     message:
-    //       "Registration succesfull , otp sent to your email expires in 10 minutes",
-    //   });
+    res
+      .status(200)
+      .json({
+        message:
+          "Registration succesfull , otp sent to your email expires in 10 minutes",
+      });
   } catch (e) {
     console.log("failed to create user");
     res.status(406).json({ message: "failed to create user" });
