@@ -60,7 +60,7 @@ router.post("/signin", async (req, res) => {
         alreadyexistinguser[0].password,
       );
 
-      token = jwt.sign(
+       token = jwt.sign(
         { email: alreadyexistinguser[0].email },
 
         process.env.JWT_SECRET,
@@ -68,8 +68,22 @@ router.post("/signin", async (req, res) => {
           expiresIn: 60 * 60,
         },
       );
-      res.status(200).json({ message: "User successfully logged in " });
-      console.log(token);
+
+      
+      if(!comparepassword){
+
+      console.log(e);
+      return  res.status(400).json({message:"wrong email or password"});
+      }
+
+      else{
+
+     return  res.status(200).json({message:"user successfully logged in "})
+      }
+
+     
+   
+      // console.log(token);
     } catch (e) {
       console.log(e);
       res.status(400).json({ message: "Wrong email or Password " });
