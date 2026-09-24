@@ -34,15 +34,15 @@ router.post("/add", async (req, res) => {
       productId: productId,
     });
 
+    // console.log("Product ID received:", productId);
+    // console.log("Existing cart item:", existingCartItem);
     if (existingCartItem) {
       existingCartItem.quantity += 1;
       await existingCartItem.save();
-      return res
-        .status(200)
-        .json({
-          message: "Product quantity increased",
-          product: existingCartItem,
-        });
+      return res.status(200).json({
+        message: "Product quantity increased",
+        product: existingCartItem,
+      });
     }
 
     const cartItem = new cartModel({
@@ -51,7 +51,7 @@ router.post("/add", async (req, res) => {
       price: foundItem.price,
       description: foundItem.description,
       category: foundItem.category,
-      quantity: foundItem.quantity,
+      quantity: 1,
     });
     await cartItem.save();
 
@@ -87,7 +87,7 @@ router.delete("/remove", async (req, res) => {
   const productId = req.body.productId;
 
   try {
-    const deleteItem = await cartModel.findByIdAndDelete({
+    const deleteItem = await cartModel.findOneAndDelete({
       productId: productId,
     });
 
@@ -112,7 +112,7 @@ router.put("/update", async (req, res) => {
   const quantity = req.body.quantity;
 
   try {
-    updatedquantity = await cartModel.findByIdAndUpdate(
+    updatedquantity = await cartModel.findOneAndUpdate(
       { productId: productId },
       { quantity: quantity },
       { new: true },

@@ -11,6 +11,7 @@ const mongoose = require("mongoose");
 const app = express();
 app.use(cors())
 app.use(express.json());
+require("dotenv").config();
 
 app.use("/user", user);
 app.use("/cart", cart);
