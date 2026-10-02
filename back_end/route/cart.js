@@ -52,6 +52,7 @@ router.post("/add", async (req, res) => {
       description: foundItem.description,
       category: foundItem.category,
       quantity: 1,
+      img : foundItem.img
     });
     await cartItem.save();
 

@@ -29,10 +29,13 @@ const cartSchema = new mongoose.Schema({
   price: Number,
   description: String,
   category: String,
+   
   quantity: {
     type: Number,
     default: 1,
   },
+  img : String
+ 
 });
 
 const cart = mongoose.model("cart", cartSchema);
